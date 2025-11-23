@@ -1,0 +1,10 @@
+# QT编译输出
+build-*/
+release/
+debug/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.app
