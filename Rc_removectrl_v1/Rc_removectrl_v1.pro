@@ -12,19 +12,28 @@ SOURCES += \
     connectwidget.cpp \
     joystick.cpp \
     main.cpp \
+    mybutton.cpp \
+    myscroller_horiz.cpp \
+    myscroller_vertical.cpp \
     rcwidget.cpp \
     udpservice.cpp \
     widget.cpp
 
 HEADERS += \
     connectwidget.h \
+    datastruct.h \
     joystick.h \
+    mybutton.h \
+    myscroller_horiz.h \
+    myscroller_vertical.h \
     rcwidget.h \
     udpservice.h \
     widget.h
 
 FORMS += \
     connectwidget.ui \
+    myscroller_horiz.ui \
+    myscroller_vertical.ui \
     rcwidget.ui \
     widget.ui
 
@@ -35,3 +44,26 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res_Joystick/res_Joystick.qrc
+
+
+
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/build.gradle \
+    android/gradle.properties \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew \
+    android/gradlew.bat \
+    android/res/values/libs.xml \
+    android/res/xml/qtprovider_paths.xml
+
+contains(ANDROID_TARGET_ARCH,arm64-v8a) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/android
+}
+
+
+
+

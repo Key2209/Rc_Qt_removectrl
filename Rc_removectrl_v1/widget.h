@@ -1,14 +1,19 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include "UdpService.h"
+#include "joystick.h"
+#include "rcwidget.h"
 #include <QWidget>
-
+#include <QTimer>
+#include <QEvent>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
 }
 QT_END_NAMESPACE
 
+#include "datastruct.h"
 class Widget : public QWidget
 {
     Q_OBJECT
@@ -20,9 +25,37 @@ public:
 private slots:
     void on_pushButton_start_clicked();
 
+    void on_pushButton_test_clicked();
+
+
     void on_pushButton_connect_clicked();
+
+    void on_pushButton_connect_2_clicked();
 
 private:
     Ui::Widget *ui;
+    UdpService *m_udpService=nullptr;
+    UiDataStruct m_Uidata;
+    QString m_IpAddress_Domain;
+
+    QTimer *m_sendDataTimer=nullptr;
+    void handleBackAction(QWidget *senderWidget);
+
+    void updateControlValues();
+    UiDataStruct getControlValues(){updateControlValues();return m_Uidata;}
+    void sendDataTimerTimeout();
+
+
+
+
+    Joystick* joystick1=nullptr;
+    Joystick* joystick2=nullptr;
+    float scroller_horiz1_value=0.0;
+    float scroller_vertical1_value=0.0;
+    int *button_group1_states=nullptr;
+
+protected:
+    // ⭐ 重写 eventFilter，用于集中处理所有子 Widget 的事件
+    bool eventFilter(QObject *watched, QEvent *event) override;
 };
 #endif // WIDGET_H

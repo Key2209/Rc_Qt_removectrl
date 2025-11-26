@@ -12,8 +12,12 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -22,49 +26,87 @@ class Ui_ConnectWidget
 {
 public:
     QGridLayout *gridLayout;
+    QSpacerItem *verticalSpacer_2;
+    QSpacerItem *horizontalSpacer_2;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
     QLabel *label;
-    QLabel *label_2;
+    QLineEdit *wifiName;
+    QHBoxLayout *horizontalLayout;
     QLabel *label_3;
-    QLineEdit *lineEdit;
-    QLabel *label_4;
-    QLineEdit *lineEdit_2;
+    QLineEdit *domain_ip;
+    QPushButton *pushButton_connect;
+    QSpacerItem *horizontalSpacer;
+    QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *ConnectWidget)
     {
         if (ConnectWidget->objectName().isEmpty())
             ConnectWidget->setObjectName("ConnectWidget");
-        ConnectWidget->resize(400, 300);
+        ConnectWidget->resize(716, 433);
         gridLayout = new QGridLayout(ConnectWidget);
         gridLayout->setObjectName("gridLayout");
+        verticalSpacer_2 = new QSpacerItem(20, 161, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_2, 0, 1, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(204, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_2, 1, 0, 1, 1);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
         label = new QLabel(ConnectWidget);
         label->setObjectName("label");
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
+        horizontalLayout_2->addWidget(label);
 
-        label_2 = new QLabel(ConnectWidget);
-        label_2->setObjectName("label_2");
+        wifiName = new QLineEdit(ConnectWidget);
+        wifiName->setObjectName("wifiName");
 
-        gridLayout->addWidget(label_2, 0, 1, 1, 1);
+        horizontalLayout_2->addWidget(wifiName);
 
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
         label_3 = new QLabel(ConnectWidget);
         label_3->setObjectName("label_3");
 
-        gridLayout->addWidget(label_3, 1, 0, 1, 1);
+        horizontalLayout->addWidget(label_3);
 
-        lineEdit = new QLineEdit(ConnectWidget);
-        lineEdit->setObjectName("lineEdit");
+        domain_ip = new QLineEdit(ConnectWidget);
+        domain_ip->setObjectName("domain_ip");
 
-        gridLayout->addWidget(lineEdit, 1, 1, 1, 1);
+        horizontalLayout->addWidget(domain_ip);
 
-        label_4 = new QLabel(ConnectWidget);
-        label_4->setObjectName("label_4");
 
-        gridLayout->addWidget(label_4, 2, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout);
 
-        lineEdit_2 = new QLineEdit(ConnectWidget);
-        lineEdit_2->setObjectName("lineEdit_2");
 
-        gridLayout->addWidget(lineEdit_2, 2, 1, 1, 1);
+        verticalLayout_2->addLayout(verticalLayout);
+
+        pushButton_connect = new QPushButton(ConnectWidget);
+        pushButton_connect->setObjectName("pushButton_connect");
+
+        verticalLayout_2->addWidget(pushButton_connect);
+
+
+        gridLayout->addLayout(verticalLayout_2, 1, 1, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(204, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer, 1, 2, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 161, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 2, 1, 1, 1);
 
 
         retranslateUi(ConnectWidget);
@@ -76,9 +118,8 @@ public:
     {
         ConnectWidget->setWindowTitle(QCoreApplication::translate("ConnectWidget", "Form", nullptr));
         label->setText(QCoreApplication::translate("ConnectWidget", "<html><head/><body><p align=\"center\"><span style=\" font-weight:700;\">WIFI:</span></p></body></html>", nullptr));
-        label_2->setText(QCoreApplication::translate("ConnectWidget", "<html><head/><body><p align=\"center\"><span style=\" font-weight:700;\">WIFI:</span></p></body></html>", nullptr));
-        label_3->setText(QCoreApplication::translate("ConnectWidget", "<html><head/><body><p align=\"center\"><span style=\" font-weight:700;\">WIFI:</span></p></body></html>", nullptr));
-        label_4->setText(QCoreApplication::translate("ConnectWidget", "<html><head/><body><p align=\"center\"><span style=\" font-weight:700;\">WIFI:</span></p></body></html>", nullptr));
+        label_3->setText(QCoreApplication::translate("ConnectWidget", "<html><head/><body><p align=\"center\"><span style=\" font-weight:700;\">IP/DOMAIN</span></p></body></html>", nullptr));
+        pushButton_connect->setText(QCoreApplication::translate("ConnectWidget", "\350\277\236\346\216\245", nullptr));
     } // retranslateUi
 
 };

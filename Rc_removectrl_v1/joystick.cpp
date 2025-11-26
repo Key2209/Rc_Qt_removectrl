@@ -5,6 +5,8 @@
 
 Joystick::Joystick(QWidget *parent)
     : QWidget(parent) {
+
+
     setAttribute(Qt::WA_AcceptTouchEvents);
 
     String_big_png   = ":/joystick/joystick1.png";
@@ -184,6 +186,13 @@ void Joystick::paintEvent(QPaintEvent* event) {
         Joystick_Angle = 270;
     }
     /*********************数据死区处理*****************************/
+    //qDebug()<<"joystick X:"<<Joystick_X<<" Y:"<<Joystick_Y<<" Long:"<<Joystick_Long<<" Angle:"<<Joystick_Angle;
+
+    joystickData.x = Joystick_X;
+    joystickData.y = Joystick_Y;
+    joystickData.long_value = Joystick_Long;
+    joystickData.angle = Joystick_Angle;
+
     emit stateChanged();
 }
 

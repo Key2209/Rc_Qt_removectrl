@@ -9,6 +9,15 @@
 #include <QTouchEvent>
 #include <QPointF>
 
+typedef struct JoystickDataStruct
+{
+    float x;
+    float y;
+    double long_value;
+    int angle;
+}JoystickDataStruct;
+
+
 class Joystick : public QWidget {
     Q_OBJECT
 public:
@@ -27,7 +36,9 @@ public:
     double get_Joystick_Long(void);
     double get_Joystick_X(void);
     double get_Joystick_Y(void);
-
+    JoystickDataStruct get_Joystick_ALLData(void){
+        return joystickData;
+    }
     void set_Joystick_Size(int cir_Width,int cir_Height);
     /**************************外部接口*****************************/
 
@@ -64,7 +75,7 @@ private:
     double Joystick_Y = 0;
     double Joystick_Long = 0;
     int Joystick_Angle = 0;
-
+    JoystickDataStruct joystickData;
     void Joystick_Init();
     void processTouchEvent(QTouchEvent *event);
     void updateHandlePosition(const QPointF &pos);

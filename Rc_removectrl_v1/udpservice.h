@@ -9,18 +9,44 @@
 #include <QDebug>
 #include <QTimer>
 
+#include "datastruct.h"
+using ControlValueGetter = std::function<UiDataStruct()>;
 class UdpService : public QObject
 {
     Q_OBJECT
 public:
     // 构造函数：需要指定目标（ESP32）的 MDNS 域名和端口
-    explicit UdpService(const QString& targetMdnsHost, quint16 targetPort, QObject *parent = nullptr);
+    explicit UdpService(quint16 targetPort, QObject *parent = nullptr);
     ~UdpService();
 
     // 公共方法
-    void startConnectionAttempt();
-    void sendControlCommand(int throttle, int steer);
+    void startConnectionAttempt();//连接
+    void sendControlCommand();
 
+    void sendData(const UiDataStruct &data);//发送控制数据
+    void set_targetMdnsHost(const QString &MdnsHost){
+        m_targetMdnsHost=MdnsHost;
+        // 尝试将 MDNS 域名解析为 IP 地址
+        // QHostAddress 的构造函数支持域名解析，但 `.local` 域名在某些系统上可能有问题。
+        m_targetAddress = QHostAddress(m_targetMdnsHost);
+
+        if (m_targetAddress.isNull()) {
+            qWarning() << "MDNS Hostname could not be immediately resolved. Will rely on network services.";
+            // 即使解析失败，我们仍然使用 QHostAddress(m_targetMdnsHost) 作为发送目标，
+            // 期望 QUdpSocket 内部能处理，但最好是有一个已解析的 IP。
+        }
+        qDebug() << "Set target MDNS host to:" << m_targetMdnsHost << "Resolved address:" << m_targetAddress.toString();
+    }//手动设置MDNS地址
+    void set_targetAddress(const QString &address){
+
+        m_targetAddress=QHostAddress(address);
+        if (m_targetAddress.isNull()) {
+            qWarning() << "MDNS Hostname could not be immediately resolved. Will rely on network services.";
+        }
+    }//手动设置IP地址
+
+
+    void setControlValueGetter(ControlValueGetter getter) { m_controlValueGetter = std::move(getter); }
 signals:
     // 信号：通知 UI 连接状态
     void connectionStatusChanged(bool isConnected);
@@ -35,6 +61,7 @@ private slots:
     // 槽：用于处理连接尝试的定时器，定期发送连接请求
     void connectionTimerTimeout();
 
+    void sendDataTimerTimeout();//用于周期性发送控制命令
 private:
     // 核心网络组件
     QUdpSocket *m_udpSocket;
@@ -48,7 +75,7 @@ private:
 
     // 连接尝试定时器
     QTimer *m_connectionTimer;
-
+    QTimer *m_sendDataTimer; //用于周期性发送控制命令
     // 目标地址 (解析 MDNS 后的 IP 地址)
     QHostAddress m_targetAddress;
 
@@ -56,6 +83,9 @@ private:
     void sendJson(const QJsonObject& jsonObject);
     void processIncomingMessage(const QByteArray& data);
 
+
+
+    ControlValueGetter m_controlValueGetter;
     // 由于 QUdpSocket 不支持直接用 MDNS 域名发送，
     // 在 Android/Qt 层面需要先解析。这里简化处理，假设
     // MDNS 解析后的 IP 地址可以直接发送，或者在初次通信时广播/硬编码。

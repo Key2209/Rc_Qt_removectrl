@@ -17,10 +17,118 @@
    <item row="0" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="ConnectWidget" name="page_connect"/>
      <widget class="RcWidget" name="page_rc"/>
+     <widget class="QWidget" name="page_test">
+      <widget class="MyScroller_Horiz" name="widget" native="true">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>90</y>
+         <width>451</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #1E1E20;</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="horizontalSlider">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>240</y>
+         <width>421</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QSlider {
+    /* 1. 消除外边距，让滑条占据整个控件区域 */
+    padding: 0px;
+    margin: 0px;
+}
+
+QSlider::groove:horizontal {
+    /* 2. 滑槽厚度与控件高度一致 */
+    height: 50px;
+    
+    /* 3. 设置未填充区域的背景色（即矩形右侧的颜色） */
+    background: #E0E0E0; /* 浅灰色 */
+    
+    /* 4. 消除边框，使其看起来像一个纯矩形 */
+    border: 1px solid #C0C0C0; 
+    
+    /* 5. 消除圆角 */
+    border-radius: 0px; 
+}
+
+QSlider::sub-page:horizontal {
+    /* 6. 设置已填充区域的背景色（即矩形左侧的颜色） */
+    background: #1E90FF; /* 亮蓝色 */
+    
+    /* 7. 确保 sub-page 同样是直角 */
+    border-radius: 0px;
+}
+
+QSlider::add-page:horizontal {
+    /* 8. 确保 add-page 继承 groove 的样式（即未填充区域的颜色） */
+    background: #E0E0E0;
+    border-radius: 0px;
+}
+
+QSlider::handle:horizontal {
+    /* 9. 将滑块设计成一个不破坏矩形线条的细长竖线 */
+    
+    /* 宽度：非常细的线 */
+    width: 0px; 
+    
+    /* 高度：与滑槽高度相同，实现垂直对齐 */
+    height: 0px; 
+    
+    /* 消除 handle 的默认突出边距，使它完全对齐滑槽上下边缘 */
+    margin: 0px 0px 0px 0px; 
+    
+    /* 颜色：设置一个可见色，作为拖动标记 */
+    background: none; 
+    
+    /* 边框：稍微增加一点区分度 */
+    border: 0px solid #333333; 
+    border-radius: 0px;
+}
+
+</string>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QSlider" name="horizontalSlider_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>371</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="MyScroller_vertical" name="widget_2" native="true">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>50</y>
+         <width>81</width>
+         <height>291</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
      <widget class="QWidget" name="page_main">
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -45,7 +153,45 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="pushButton_test">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Test</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="pushButton_connect">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>连接</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_connect_2">
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -82,6 +228,18 @@
    <class>ConnectWidget</class>
    <extends>QWidget</extends>
    <header location="global">connectwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MyScroller_Horiz</class>
+   <extends>QWidget</extends>
+   <header location="global">myscroller_horiz.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MyScroller_vertical</class>
+   <extends>QWidget</extends>
+   <header location="global">myscroller_vertical.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

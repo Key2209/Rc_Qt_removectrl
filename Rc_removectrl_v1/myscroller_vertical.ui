@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MyScroller_vertical</class>
+ <widget class="QWidget" name="MyScroller_vertical">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>82</width>
+    <height>799</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #1E1E20;</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="value_label">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel#value_label {
+    /* 核心外观 */
+    background-color: #FAFAFA;
+    color: black;             /* 深灰色文字 */
+    font-family: &quot;Segoe UI&quot;, &quot;Helvetica&quot;, sans-serif;
+    font-weight: bold;
+
+    /* 边框和圆角 */
+    border: 1px solid #CCCCCC;  /* 细微的边框 */
+    border-radius: 8px;         /* 柔和的圆角 */
+    
+    /* 阴影效果 (可选，但推荐，模拟深度) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    
+    /* 居中显示 */
+    qproperty-alignment: AlignCenter; 
+}</string>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="verticalSlider">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>150</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QSlider {
+    /* 1. 消除外边距，让滑条占据整个控件区域 */
+    padding: 0px;
+    margin: 0px;
+}
+
+QSlider::groove:vertical {
+    /* 2. 滑槽宽度与控件宽度一致 (原先是高度) */
+    width: 50px;
+    
+    /* 3. 设置未填充区域的背景色（即矩形底部的颜色） */
+    background: #D8D8D8; /* 浅灰色 */
+    
+    /* 4. 消除边框，使其看起来像一个纯矩形 */
+    border: 1px solid #C0C0C0; 
+    
+    /* 5. 消除圆角 */
+    border-radius: 0px; 
+}
+
+QSlider::add-page:vertical {
+    /* 6. 设置已填充区域的背景色（即矩形底部的颜色，QSlider::sub-page 表示从小值到滑块的区域） */
+    /* 注意：默认垂直滑条是从下往上增长，sub-page 在下部 */
+    background: #1E90FF; /* 亮蓝色 */
+    
+    /* 7. 确保 sub-page 同样是直角 */
+    border-radius: 0px;
+}
+
+QSlider::sub-page:vertical {
+    /* 8. 确保 add-page 继承 groove 的样式（即未填充区域的颜色，add-page 在上部） */
+    background: #E0E0E0;
+    border-radius: 0px;
+}
+
+QSlider::handle:vertical {
+    /* 9. 将滑块设计成一个不破坏矩形线条的细长横线 */
+    
+    /* 宽度：与滑槽宽度相同，实现水平对齐 */
+    width: 50px; 
+    
+    /* 高度：非常细的线 (原先是宽度) */
+    height: 4px; 
+    
+    /* 消除 handle 的默认突出边距，使它完全对齐滑槽左右边缘 */
+    /* 水平：0px 0px 0px 0px (原先是 0px 0px 0px 0px) */
+    /* 垂直方向的 margin 保持 0，以消除默认的垂直偏移 */
+    margin: 0px 0px 0px 0px; 
+    
+    /* 颜色：设置一个可见色，作为拖动标记 */
+    background: white; 
+    
+    /* 边框：稍微增加一点区分度 */
+    border: 1px solid #333333; 
+    border-radius: 1px;
+}
+
+QSlider::handle:vertical:hover {
+    /* 10. 悬停时增加阴影或高亮 */
+    background: #FFFFFF;
+    border: 1px solid #1E90FF;
+}</string>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
