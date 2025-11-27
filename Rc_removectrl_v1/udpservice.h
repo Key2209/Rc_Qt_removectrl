@@ -8,6 +8,7 @@
 #include <QJsonDocument>
 #include <QDebug>
 #include <QTimer>
+#include <QHostInfo>
 
 #include "datastruct.h"
 using ControlValueGetter = std::function<UiDataStruct()>;
@@ -24,25 +25,20 @@ public:
     void sendControlCommand();
 
     void sendData(const UiDataStruct &data);//发送控制数据
-    void set_targetMdnsHost(const QString &MdnsHost){
-        m_targetMdnsHost=MdnsHost;
-        // 尝试将 MDNS 域名解析为 IP 地址
-        // QHostAddress 的构造函数支持域名解析，但 `.local` 域名在某些系统上可能有问题。
-        m_targetAddress = QHostAddress(m_targetMdnsHost);
+    void set_targetMdnsHost(const QString &MdnsHost);
 
-        if (m_targetAddress.isNull()) {
-            qWarning() << "MDNS Hostname could not be immediately resolved. Will rely on network services.";
-            // 即使解析失败，我们仍然使用 QHostAddress(m_targetMdnsHost) 作为发送目标，
-            // 期望 QUdpSocket 内部能处理，但最好是有一个已解析的 IP。
-        }
-        qDebug() << "Set target MDNS host to:" << m_targetMdnsHost << "Resolved address:" << m_targetAddress.toString();
-    }//手动设置MDNS地址
+
+    //手动设置MDNS地址
     void set_targetAddress(const QString &address){
 
         m_targetAddress=QHostAddress(address);
         if (m_targetAddress.isNull()) {
             qWarning() << "MDNS Hostname could not be immediately resolved. Will rely on network services.";
         }
+
+
+
+
     }//手动设置IP地址
 
 
@@ -62,6 +58,8 @@ private slots:
     void connectionTimerTimeout();
 
     void sendDataTimerTimeout();//用于周期性发送控制命令
+
+    void onHostLookupFinished(const QHostInfo &info);
 private:
     // 核心网络组件
     QUdpSocket *m_udpSocket;

@@ -19,7 +19,7 @@ public:
     QString getIpAddress() const
     {
 
-        return ui->domain_ip->text();
+        return ui->domain->text();
     }
 
 signals:

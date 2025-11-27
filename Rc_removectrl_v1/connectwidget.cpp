@@ -22,7 +22,7 @@ ConnectWidget::~ConnectWidget()
 
 void ConnectWidget::on_pushButton_connect_clicked()
 {
-    emit ConnectWidget_connectClicked(ui->domain_ip->text());
+    emit ConnectWidget_connectClicked(ui->domain->text());
 }
 
 

@@ -44,7 +44,7 @@ Widget::Widget(QWidget *parent)
 
             qDebug()<<"m_IpAddress_Domain:"<<m_IpAddress_Domain;
             m_udpService->set_targetMdnsHost(m_IpAddress_Domain);
-            m_udpService->startConnectionAttempt();
+            //m_udpService->startConnectionAttempt();
             qDebug()<<"Connecting to "<<m_IpAddress_Domain;
             qDebug()<<"UDP服务已创建";
 

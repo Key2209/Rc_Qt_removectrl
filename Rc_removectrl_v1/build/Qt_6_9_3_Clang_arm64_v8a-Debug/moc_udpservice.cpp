@@ -48,7 +48,10 @@ template <> constexpr inline auto UdpService::qt_create_metaobjectdata<qt_meta_t
         "message",
         "readPendingDatagrams",
         "connectionTimerTimeout",
-        "sendDataTimerTimeout"
+        "sendDataTimerTimeout",
+        "onHostLookupFinished",
+        "QHostInfo",
+        "info"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -70,6 +73,10 @@ template <> constexpr inline auto UdpService::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'sendDataTimerTimeout'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onHostLookupFinished'
+        QtMocHelpers::SlotData<void(const QHostInfo &)>(11, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 12, 13 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -99,7 +106,20 @@ void UdpService::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->readPendingDatagrams(); break;
         case 4: _t->connectionTimerTimeout(); break;
         case 5: _t->sendDataTimerTimeout(); break;
+        case 6: _t->onHostLookupFinished((*reinterpret_cast< std::add_pointer_t<QHostInfo>>(_a[1]))); break;
         default: ;
+        }
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 6:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QHostInfo >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
@@ -131,14 +151,14 @@ int UdpService::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
+        if (_id < 7)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 7;
     }
     return _id;
 }

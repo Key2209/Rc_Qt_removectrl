@@ -1,5 +1,6 @@
 #include "UdpService.h"
 
+#include <QHostInfo>
 #include <QJsonArray>
 
 // --- 构造函数与析构函数 ---
@@ -135,6 +136,47 @@ void UdpService::sendData(const UiDataStruct &data)
     sendJson(json);
 }
 
+void UdpService::set_targetMdnsHost(const QString &MdnsHost)
+{
+    // m_targetMdnsHost=MdnsHost;
+    // // 尝试将 MDNS 域名解析为 IP 地址
+    // // QHostAddress 的构造函数支持域名解析，但 `.local` 域名在某些系统上可能有问题。
+    // m_targetAddress = QHostAddress(m_targetMdnsHost);
+
+    // if (m_targetAddress.isNull()) {
+    //     qWarning() << "MDNS Hostname could not be immediately resolved. Will rely on network services.";
+    //     // 即使解析失败，我们仍然使用 QHostAddress(m_targetMdnsHost) 作为发送目标，
+    //     // 期望 QUdpSocket 内部能处理，但最好是有一个已解析的 IP。
+    // }
+    // qDebug() << "Set target MDNS host to:" << m_targetMdnsHost << "Resolved address:" << m_targetAddress.toString();
+
+
+    qDebug() << "Starting connection attempt...";
+    m_isConnected = false;
+    emit connectionStatusChanged(false);
+
+    // // 如果已经有 IP，直接发送一次握手并启动定时器
+    // if (!m_targetAddress.isNull()) {
+    //     connectionTimerTimeout();
+    //     m_connectionTimer->start();
+    //     return;
+    // }
+
+    // 没有 IP：如果用户指定了域名且看起来像 .local 则尝试 mDNS，否则做普通 DNS lookup
+    if (!MdnsHost.isEmpty()) {
+
+        // 如果没有 QZeroConf，尝试普通的 hostname -> IP 解析（QHostInfo）
+        qDebug() << "Resolving host via QHostInfo:" << MdnsHost;
+        QHostInfo::lookupHost(MdnsHost, this, SLOT(onHostLookupFinished(QHostInfo)));
+
+    } else {
+        qWarning() << "No target host specified";
+    }
+
+
+
+}
+
 // --- 私有辅助方法 ---
 
 /**
@@ -173,14 +215,41 @@ void UdpService::connectionTimerTimeout()
     // 发送连接请求
     QJsonObject json;
     json["cmd"] = "connect";
+    qDebug() << "connectionTimerTimeout Sending connection request...";
     sendJson(json);
 
-    qDebug() << "Sending connection request...";
+
 }
 
 void UdpService::sendDataTimerTimeout()
 {
 
+}
+
+void UdpService::onHostLookupFinished(const QHostInfo &info)
+{
+    if (info.error() != QHostInfo::NoError) {
+
+        qDebug() << "Failed to resolve host:" << info.hostName();
+
+        qWarning() << "Host lookup failed:" << info.errorString();
+        qDebug()<<"ip:"<<info.addresses();
+        return;
+    }
+
+    // 找到第一个 IPv4 地址作为目标
+    for (const QHostAddress &addr : info.addresses()) {
+        if (addr.protocol() == QAbstractSocket::IPv4Protocol) {
+            m_targetAddress = addr;
+            qDebug() << "Resolved host" << info.hostName() << "->" << addr.toString();
+            // 解析成功后发送一次连接请求（或者启动定时器）
+            startConnectionAttempt();
+
+            return;
+        }
+    }
+
+    qWarning() << "No IPv4 address found for host" << info.hostName();
 }
 
 // --- 槽函数：数据接收 ---

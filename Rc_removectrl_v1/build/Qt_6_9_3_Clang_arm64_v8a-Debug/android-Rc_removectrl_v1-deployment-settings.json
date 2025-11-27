@@ -7,7 +7,7 @@
    "qtPluginsDirectory": "plugins",
    "qtQmlDirectory": "qml",
    "sdk": "F:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows",
-   "sdkBuildToolsRevision": "29.0.3",
+   "sdkBuildToolsRevision": "35.0.0",
    "ndk": "F:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018",
    "toolchain-prefix": "llvm",
    "tool-prefix": "llvm",
