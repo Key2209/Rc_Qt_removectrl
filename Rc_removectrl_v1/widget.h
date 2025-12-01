@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <QTimer>
 #include <QEvent>
+#include "androidinfoprovider.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
@@ -32,20 +33,21 @@ private slots:
 
     void on_pushButton_connect_2_clicked();
 
+    void onStackedWidgetPageChanged(int index);
 private:
     Ui::Widget *ui;
-    UdpService *m_udpService=nullptr;
-    UiDataStruct m_Uidata;
-    QString m_IpAddress_Domain;
+    UdpService *m_udpService=nullptr;//UDP服务类
+    UiDataStruct m_Uidata;//UI数据结构体
+    QString m_IpAddress_Domain;//IP地址或域名
 
-    QTimer *m_sendDataTimer=nullptr;
+    QTimer *m_sendDataTimer=nullptr;//发送数据定时器
     void handleBackAction(QWidget *senderWidget);
 
     void updateControlValues();
     UiDataStruct getControlValues(){updateControlValues();return m_Uidata;}
     void sendDataTimerTimeout();
 
-
+    AndroidInfoProvider *m_androidInfoProvider=nullptr;
 
 
     Joystick* joystick1=nullptr;
@@ -53,6 +55,8 @@ private:
     float scroller_horiz1_value=0.0;
     float scroller_vertical1_value=0.0;
     int *button_group1_states=nullptr;
+signals:
+
 
 protected:
     // ⭐ 重写 eventFilter，用于集中处理所有子 Widget 的事件

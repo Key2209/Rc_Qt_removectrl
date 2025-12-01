@@ -1,6 +1,9 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "connectwidget.h"
+#include "androidinfoprovider.h"
+
+
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -15,8 +18,14 @@ Widget::Widget(QWidget *parent)
     ui->page_rc->installEventFilter(this);
     ui->page_test->installEventFilter(this);
 
+    // 创建 UDP 服务实例
+    m_udpService = new UdpService(3333, this); // 端口
 
+    //获取安卓设备信息类
+    m_androidInfoProvider=new AndroidInfoProvider;
+    m_udpService->setDeviceName(m_androidInfoProvider->getDeviceInfo());
 
+    //发送数据定时器
     m_sendDataTimer = new QTimer(this);
     m_sendDataTimer->setInterval(20); // 20次/秒，高频发送
     m_sendDataTimer->stop(); // 初始停止
@@ -24,45 +33,86 @@ Widget::Widget(QWidget *parent)
 
 
 
+    //解析到的IP地址信号
+    connect(m_udpService,&UdpService::sendIPAddress,this,[this](QString ipAddress){
+        qDebug()<<"你好你好解析到的IP地址:"<<ipAddress;
+        ui->page_connect->setConnectIpAddress(ipAddress);
+    });
+
+
+    // 监听 stackedWidget 页面切换信号
+    connect(ui->stackedWidget,&QStackedWidget::currentChanged,this,&Widget::onStackedWidgetPageChanged);
+
+
+    connect(ui->page_connect,&ConnectWidget::ConnectWidget_domainClicked,this,[this](QString ipAddress)
+        {
+            m_udpService->set_targetMdnsHost(ipAddress);
+        });
+
+    //点击连接按钮信号
+    // connect(ui->page_connect,&ConnectWidget::ConnectWidget_connectClicked,this,[this](QString ipAddress){
+
+    //     if(ipAddress.isEmpty()||m_IpAddress_Domain==ipAddress){
+    //         return;
+    //         qDebug()<<"IP地址为空或未更改，跳过连接";
+    //     }
+
+    //     if(m_udpService!=nullptr)
+    //     {
+    //         delete m_udpService;
+    //         //disconnect()
+    //     }
+
+    //     //m_udpService = new UdpService(3333, this); // 端口
+    //     //m_IpAddress_Domain=ipAddress;
+    //     if(m_udpService){
+
+    //         qDebug()<<"m_IpAddress_Domain:"<<m_IpAddress_Domain;
+    //         //m_udpService->set_targetMdnsHost(m_IpAddress_Domain);
+    //         //m_udpService->startConnectionAttempt();
+    //         qDebug()<<"Connecting to "<<m_IpAddress_Domain;
+    //         qDebug()<<"UDP服务已创建";
+
+
+    //         // //连接状态变化信号
+    //         // connect(m_udpService, &UdpService::connectionStatusChanged, this, [this](bool isConnected){
+    //         //     if(isConnected){
+    //         //         qDebug() << "连接成功，切换到遥控界面";
+    //         //         ui->stackedWidget->setCurrentWidget(ui->page_rc);
+    //         //         m_sendDataTimer->start();
+    //         //     }else{
+    //         //         //ui->stackedWidget->setCurrentWidget(ui->page_connect);
+    //         //         m_sendDataTimer->stop();
+    //         //     }
+
+    //         // });
+
+
+    //     }
+    // });
+
+
 
     connect(ui->page_connect,&ConnectWidget::ConnectWidget_connectClicked,this,[this](QString ipAddress){
 
-        if(ipAddress.isEmpty()||m_IpAddress_Domain==ipAddress){
-            return;
-            qDebug()<<"IP地址为空或未更改，跳过连接";
-        }
+        m_udpService->set_targetAddress(ipAddress);
+        m_udpService->startConnectionAttempt();
 
-        if(m_udpService!=nullptr)
-        {
-            delete m_udpService;
-            //disconnect()
-        }
-
-        m_udpService = new UdpService(3333, this); // 端口
-        m_IpAddress_Domain=ipAddress;
-        if(m_udpService){
-
-            qDebug()<<"m_IpAddress_Domain:"<<m_IpAddress_Domain;
-            m_udpService->set_targetMdnsHost(m_IpAddress_Domain);
-            //m_udpService->startConnectionAttempt();
-            qDebug()<<"Connecting to "<<m_IpAddress_Domain;
-            qDebug()<<"UDP服务已创建";
-
-            connect(m_udpService, &UdpService::connectionStatusChanged, this, [this](bool isConnected){
-                if(isConnected){
-                    qDebug() << "连接成功，切换到遥控界面";
-                    ui->stackedWidget->setCurrentWidget(ui->page_rc);
-                    m_sendDataTimer->start();
-                }else{
-                    //ui->stackedWidget->setCurrentWidget(ui->page_connect);
-                    m_sendDataTimer->stop();
-                }
-            });
-
-
-        }
     });
 
+    //连接状态变化信号
+    connect(m_udpService, &UdpService::connectionStatusChanged, this, [this](bool isConnected){
+        if(isConnected){
+            qDebug() << "连接成功，切换到遥控界面";
+            ui->stackedWidget->setCurrentWidget(ui->page_rc);
+            showAndroidToast("连接成功",ToastDuration::SHORT);
+            m_sendDataTimer->start();
+        }else{
+            ui->stackedWidget->setCurrentWidget(ui->page_connect);
+            showAndroidToast("连接断开",ToastDuration::SHORT);
+            m_sendDataTimer->stop();
+        }
+    });
 
 
 
@@ -187,5 +237,36 @@ void Widget::on_pushButton_connect_2_clicked()
 
     ui->stackedWidget->setCurrentWidget(ui->page_connect);
     qDebug() << "连接界面";
+}
+
+void Widget::onStackedWidgetPageChanged(int index)
+{
+    if (index == ui->stackedWidget->indexOf(ui->page_main))
+    {
+
+
+    }
+    else if (index == ui->stackedWidget->indexOf(ui->page_connect))
+    {
+        qDebug() << "已切换到 page_connect";
+
+        QString ipAddress = m_androidInfoProvider->getIpAddress();
+        QString wifiSsid = m_androidInfoProvider->getWifiSsid();
+        ui->page_connect->setWifiName(wifiSsid);
+        ui->page_connect->setIpAddress(ipAddress);
+
+
+
+    }
+    else if (index == ui->stackedWidget->indexOf(ui->page_rc))
+    {
+        qDebug() << "已切换到 page_rc";
+    }
+    else if (index == ui->stackedWidget->indexOf(ui->page_test))
+    {
+        qDebug() << "已切换到 page_test";
+    }
+
+
 }
 

@@ -49,10 +49,12 @@ public:
         if (Widget->objectName().isEmpty())
             Widget->setObjectName("Widget");
         Widget->resize(647, 467);
+        Widget->setStyleSheet(QString::fromUtf8("background-color: #EFEFEF;"));
         gridLayout_2 = new QGridLayout(Widget);
         gridLayout_2->setObjectName("gridLayout_2");
         stackedWidget = new QStackedWidget(Widget);
         stackedWidget->setObjectName("stackedWidget");
+        stackedWidget->setStyleSheet(QString::fromUtf8("background-color: #EFEFEF;"));
         page_connect = new ConnectWidget();
         page_connect->setObjectName("page_connect");
         stackedWidget->addWidget(page_connect);

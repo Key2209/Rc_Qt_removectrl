@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="D:\QtProject\RC\Rc_Qt_removectrl\Rc_removectrl_v1\build\Qt_6_9_3_Clang_arm64_v8a-android_release\android-build"
+    name=":"
+    type="APP"
+    maven=":android-build:unspecified"
+    agpVersion="8.8.0"
+    buildFolder="build"
+    bootClassPath="F:\Qt_for_Android\SDK\android-sdk_r24.4.1-windows\android-sdk-windows\platforms\android-35\android.jar;F:\Qt_for_Android\SDK\android-sdk_r24.4.1-windows\android-sdk-windows\build-tools\35.0.0\core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-35"
+    neverShrinking="true">
+  <lintOptions
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

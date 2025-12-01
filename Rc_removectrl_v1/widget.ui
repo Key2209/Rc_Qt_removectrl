@@ -13,9 +13,15 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #EFEFEF;</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
+     <property name="styleSheet">
+      <string notr="true">background-color: #EFEFEF;</string>
+     </property>
      <property name="currentIndex">
       <number>3</number>
      </property>

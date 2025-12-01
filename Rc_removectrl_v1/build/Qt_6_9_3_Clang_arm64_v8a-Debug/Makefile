@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = F:\Qt_for_Android\SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk\27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/bin/clang
 CXX           = F:\Qt_for_Android\SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk\27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_POSITIONING_LIB -DQT_CORE_LIB
 CFLAGS        = -target aarch64-linux-android28 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -g -Wall -W -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -target aarch64-linux-android28 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -g -std=gnu++1z -Wall -W -D_REENTRANT $(DEFINES)
-INCPATH       = -I..\..\..\Rc_removectrl_v1 -I. -IF:\Qt\6.9.3\android_arm64_v8a\include -IF:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets -IF:\Qt\6.9.3\android_arm64_v8a\include\QtGui -IF:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork -IF:\Qt\6.9.3\android_arm64_v8a\include\QtCore -I. -I. -IF:\Qt\6.9.3\android_arm64_v8a\mkspecs\android-clang
+INCPATH       = -I..\..\..\Rc_removectrl_v1 -I. -IF:\Qt\6.9.3\android_arm64_v8a\include -IF:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets -IF:\Qt\6.9.3\android_arm64_v8a\include\QtGui -IF:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork -IF:\Qt\6.9.3\android_arm64_v8a\include\QtPositioning -IF:\Qt\6.9.3\android_arm64_v8a\include\QtCore -I. -I. -IF:\Qt\6.9.3\android_arm64_v8a\mkspecs\android-clang
 QMAKE         = F:\Qt\6.9.3\mingw_64\bin\qmake6.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ DISTNAME      = libRc_removectrl_v1_arm64-v8a.so1.0.0
 DISTDIR = D:\QtProject\RC\Rc_Qt_removectrl\Rc_removectrl_v1\build\Qt_6_9_3_Clang_arm64_v8a-Debug\.tmp\libRc_removectrl_v1_arm64-v8a.so1.0.0
 LINK          = F:\Qt_for_Android\SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk\27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++ -target aarch64-linux-android28 -fno-limit-debug-info
 LFLAGS        = -Wl,-soname,libRc_removectrl_v1_arm64-v8a.so -Wl,--build-id=sha1 -Wl,--no-undefined -Wl,-z,noexecstack -shared
-LIBS          = $(SUBLIBS) F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Widgets_arm64-v8a.so F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Gui_arm64-v8a.so -lEGL F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Network_arm64-v8a.so F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Core_arm64-v8a.so -llog -pthread -lGLESv2   -llog -lz -lm -ldl -lc
+LIBS          = $(SUBLIBS) F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Widgets_arm64-v8a.so F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Gui_arm64-v8a.so -lEGL F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Network_arm64-v8a.so F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Positioning_arm64-v8a.so F:/Qt/6.9.3/android_arm64_v8a/lib/libQt6Core_arm64-v8a.so -llog -pthread -lGLESv2   -llog -lz -lm -ldl -lc
 AR            = F:\Qt_for_Android\SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk\27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar cqs
 RANLIB        = 
 SED           = $(QMAKE) -install sed
@@ -62,6 +62,7 @@ SOURCES       = ..\..\androidinfoprovider.cpp \
 		..\..\rcwidget.cpp \
 		..\..\udpservice.cpp \
 		..\..\widget.cpp qrc_res_Joystick.cpp \
+		moc_androidinfoprovider.cpp \
 		moc_connectwidget.cpp \
 		moc_joystick.cpp \
 		moc_mybutton.cpp \
@@ -81,6 +82,7 @@ OBJECTS       = androidinfoprovider.obj \
 		udpservice.obj \
 		widget.obj \
 		qrc_res_Joystick.obj \
+		moc_androidinfoprovider.obj \
 		moc_connectwidget.obj \
 		moc_joystick.obj \
 		moc_mybutton.obj \
@@ -477,6 +479,7 @@ Makefile: ..\..\Rc_removectrl_v1.pro F:\Qt\6.9.3\android_arm64_v8a\mkspecs\andro
 		F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Widgets_arm64-v8a.prl \
 		F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Gui_arm64-v8a.prl \
 		F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Network_arm64-v8a.prl \
+		F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Positioning_arm64-v8a.prl \
 		F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Core_arm64-v8a.prl
 	$(QMAKE) -o Makefile ..\..\Rc_removectrl_v1.pro -qtconf F:/Qt/6.9.3/android_arm64_v8a/bin/target_qt.conf -spec android-clang "CONFIG+=debug" "CONFIG+=qml_debug"
 F:\Qt\6.9.3\android_arm64_v8a\mkspecs\features\spec_pre.prf:
@@ -829,6 +832,7 @@ F:\Qt\6.9.3\android_arm64_v8a\mkspecs\features\lex.prf:
 F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Widgets_arm64-v8a.prl:
 F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Gui_arm64-v8a.prl:
 F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Network_arm64-v8a.prl:
+F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Positioning_arm64-v8a.prl:
 F:\Qt\6.9.3\android_arm64_v8a\lib\libQt6Core_arm64-v8a.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\..\Rc_removectrl_v1.pro -qtconf F:/Qt/6.9.3/android_arm64_v8a/bin/target_qt.conf -spec android-clang "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -896,14 +900,13 @@ compiler_moc_predefs_clean:
 moc_predefs.h: F:\Qt\6.9.3\android_arm64_v8a\mkspecs\features\data\dummy.cpp
 	F:\Qt_for_Android\SDK\android-sdk_r24.4.1-windows\android-sdk-windows\ndk\27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++ -target aarch64-linux-android28 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -g -std=gnu++1z -Wall -W -dM -E -o moc_predefs.h F:\Qt\6.9.3\android_arm64_v8a\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: moc_connectwidget.cpp moc_joystick.cpp moc_mybutton.cpp moc_myscroller_horiz.cpp moc_myscroller_vertical.cpp moc_rcwidget.cpp moc_udpservice.cpp moc_widget.cpp
+compiler_moc_header_make_all: moc_androidinfoprovider.cpp moc_connectwidget.cpp moc_joystick.cpp moc_mybutton.cpp moc_myscroller_horiz.cpp moc_myscroller_vertical.cpp moc_rcwidget.cpp moc_udpservice.cpp moc_widget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_connectwidget.cpp moc_joystick.cpp moc_mybutton.cpp moc_myscroller_horiz.cpp moc_myscroller_vertical.cpp moc_rcwidget.cpp moc_udpservice.cpp moc_widget.cpp
-moc_connectwidget.cpp: ..\..\connectwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsglobal.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiglobal.h \
+	-$(DEL_FILE) moc_androidinfoprovider.cpp moc_connectwidget.cpp moc_joystick.cpp moc_mybutton.cpp moc_myscroller_horiz.cpp moc_myscroller_vertical.cpp moc_rcwidget.cpp moc_udpservice.cpp moc_widget.cpp
+moc_androidinfoprovider.cpp: ..\..\androidinfoprovider.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QJniObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qglobal.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcoreglobal.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtversionchecks.h \
@@ -950,13 +953,134 @@ moc_connectwidget.cpp: ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtresource.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qttranslation.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qversiontagging.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtgui-config.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiexports.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgets-config.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsexports.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qwindowdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompare.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstdlibdetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcomparehelpers.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20type_traits.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhashfunctions.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstring.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qchar.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearray.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qrefcount.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnamespace.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtmetamacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qarraydata.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qpair.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qarraydatapointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qarraydataops.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontainertools_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qxptype_traits.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20functional.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20memory.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q17memory.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearrayalgorithms.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearrayview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringfwd.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringliteral.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringalgorithms.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlatin1stringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qanystringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qutf8stringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringtokenizer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringbuilder.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringconverter.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringconverter_base.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmetatype.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdatastream.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qscopedpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qiodevicebase.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfloat16.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmath.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qalgorithms.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtformat_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qiterable.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmetacontainer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontainerinfo.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtaggedpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfunctionaltools_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qscopeguard.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20utility.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlist.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qiterator.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearraylist.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringlist.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringmatcher.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreevent.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbasictimer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qabstracteventdispatcher.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qeventloop.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdeadlinetimer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qelapsedtimer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbindingstorage.h \
+		moc_predefs.h \
+		F:\Qt\6.9.3\mingw_64\bin\moc.exe
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\androidinfoprovider.h -o moc_androidinfoprovider.cpp
+
+moc_connectwidget.cpp: ..\..\connectwidget.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QSettings \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsettings.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnamespace.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcoreglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtversionchecks.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtconfiginclude.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qconfig.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcore-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtconfigmacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtdeprecationdefinitions.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompilerdetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qprocessordetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsystemdetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcoreexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtdeprecationmarkers.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtclasshelpermacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtpreprocessorsupport.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qassert.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtnoop.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtypes.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtversion.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtypeinfo.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontainerfwd.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsysinfo.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlogging.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qflags.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompare_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qatomic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbasicatomic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qatomic_cxx11.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qgenericatomic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qyieldcpu.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qconstructormacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdarwinhelpers.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qexceptionhandling.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qforeach.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qttypetraits.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfunctionpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qglobalstatic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmalloc.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qminmax.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnumeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qoverload.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qswap.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtenvironmentvariables.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtresource.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qttranslation.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qversiontagging.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompare.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstdlibdetection.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcomparehelpers.h \
@@ -964,7 +1088,6 @@ moc_connectwidget.cpp: ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtmetamacros.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs_impl.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfunctionaltools_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstring.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qchar.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringview.h \
@@ -1018,9 +1141,30 @@ moc_connectwidget.cpp: ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qscopeguard.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject_impl.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbindingstorage.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmargins.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvariant.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdebug.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtextstream.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontiguouscache.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmap.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qset.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhash.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvarlengtharray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q23utility.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20utility.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qwidget.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtgui-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgets-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qwindowdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmargins.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qaction.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qkeysequence.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qicon.h \
@@ -1032,7 +1176,6 @@ moc_connectwidget.cpp: ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qcolor.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qrgb.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qrgba64.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qimage.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpixelformat.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtransform.h \
@@ -1041,17 +1184,6 @@ moc_connectwidget.cpp: ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qspan.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20iterator.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qline.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvariant.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdebug.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtextstream.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontiguouscache.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmap.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qset.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhash.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvarlengtharray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpalette.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qbrush.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qfont.h \
@@ -1104,36 +1236,9 @@ moc_connectwidget.cpp: ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlocale.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qguiapplication_platform.h \
 		ui_connectwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QCheckBox \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qcheckbox.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlayoutitem.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qboxlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLabel \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlabel.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpicture.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLineEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlineedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\connectwidget.h -o moc_connectwidget.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\connectwidget.h -o moc_connectwidget.cpp
 
 moc_joystick.cpp: ..\..\joystick.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -1343,7 +1448,7 @@ moc_joystick.cpp: ..\..\joystick.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QPointF \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\joystick.h -o moc_joystick.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\joystick.h -o moc_joystick.cpp
 
 moc_mybutton.cpp: ..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
@@ -1554,7 +1659,7 @@ moc_mybutton.cpp: ..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QMouseEvent \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\mybutton.h -o moc_mybutton.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\mybutton.h -o moc_mybutton.cpp
 
 moc_myscroller_horiz.cpp: ..\..\myscroller_horiz.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -1776,7 +1881,7 @@ moc_myscroller_horiz.cpp: ..\..\myscroller_horiz.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QTouchEvent \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\myscroller_horiz.h -o moc_myscroller_horiz.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\myscroller_horiz.h -o moc_myscroller_horiz.cpp
 
 moc_myscroller_vertical.cpp: ..\..\myscroller_vertical.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -1998,7 +2103,7 @@ moc_myscroller_vertical.cpp: ..\..\myscroller_vertical.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QTouchEvent \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\myscroller_vertical.h -o moc_myscroller_vertical.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\myscroller_vertical.h -o moc_myscroller_vertical.cpp
 
 moc_rcwidget.cpp: ..\..\rcwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -2221,24 +2326,6 @@ moc_rcwidget.cpp: ..\..\rcwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QTouchEvent \
 		..\..\myscroller_vertical.h \
 		ui_rcwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QTextEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtextedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractscrollarea.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
-		..\..\joystick.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QPointF \
 		..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
@@ -2246,7 +2333,7 @@ moc_rcwidget.cpp: ..\..\rcwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QMouseEvent \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\rcwidget.h -o moc_rcwidget.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\rcwidget.h -o moc_rcwidget.cpp
 
 moc_udpservice.cpp: ..\..\udpservice.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QObject \
@@ -2404,6 +2491,14 @@ moc_udpservice.cpp: ..\..\udpservice.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtimer.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\QHostInfo \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qhostinfo.h \
+		..\..\androidinfoprovider.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QJniObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		..\..\datastruct.h \
 		..\..\joystick.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -2460,12 +2555,6 @@ moc_udpservice.cpp: ..\..\udpservice.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication_platform.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfuture.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfutureinterface.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmutex.h \
@@ -2483,7 +2572,7 @@ moc_udpservice.cpp: ..\..\udpservice.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QPointF \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\udpservice.h -o moc_udpservice.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\udpservice.h -o moc_udpservice.cpp
 
 moc_widget.cpp: ..\..\widget.h \
 		..\..\UdpService.h \
@@ -2642,6 +2731,14 @@ moc_widget.cpp: ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtimer.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\QHostInfo \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qhostinfo.h \
+		..\..\androidinfoprovider.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QJniObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		..\..\datastruct.h \
 		..\..\joystick.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -2698,12 +2795,6 @@ moc_widget.cpp: ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication_platform.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfuture.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfutureinterface.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmutex.h \
@@ -2735,22 +2826,6 @@ moc_widget.cpp: ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
 		..\..\myscroller_vertical.h \
 		ui_rcwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QTextEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtextedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractscrollarea.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
 		..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
@@ -2759,7 +2834,7 @@ moc_widget.cpp: ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QEvent \
 		moc_predefs.h \
 		F:\Qt\6.9.3\mingw_64\bin\moc.exe
-	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\widget.h -o moc_widget.cpp
+	F:\Qt\6.9.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1/build/Qt_6_9_3_Clang_arm64_v8a-Debug/moc_predefs.h -IF:/Qt/6.9.3/android_arm64_v8a/mkspecs/android-clang -ID:/QtProject/RC/Rc_Qt_removectrl/Rc_removectrl_v1 -IF:/Qt/6.9.3/android_arm64_v8a/include -IF:/Qt/6.9.3/android_arm64_v8a/include/QtWidgets -IF:/Qt/6.9.3/android_arm64_v8a/include/QtGui -IF:/Qt/6.9.3/android_arm64_v8a/include/QtNetwork -IF:/Qt/6.9.3/android_arm64_v8a/include/QtPositioning -IF:/Qt/6.9.3/android_arm64_v8a/include/QtCore -I. -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IF:/Qt_for_Android/SDK/android-sdk_r24.4.1-windows/android-sdk-windows/ndk/27.2.12479018/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include -IF:/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/include ..\..\widget.h -o moc_widget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -3859,33 +3934,16 @@ ui_widget.h: ..\..\widget.ui \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QTouchEvent \
 		..\..\myscroller_vertical.h \
 		ui_rcwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QTextEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtextedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractscrollarea.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
-		..\..\joystick.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QPointF \
 		..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractbutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QMouseEvent \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsglobal.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QSettings \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsettings.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnamespace.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qglobal.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcoreglobal.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtversionchecks.h \
@@ -3932,13 +3990,6 @@ ui_widget.h: ..\..\widget.ui \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtresource.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qttranslation.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qversiontagging.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtgui-config.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiexports.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgets-config.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsexports.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qwindowdefs.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnamespace.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompare.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstdlibdetection.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcomparehelpers.h \
@@ -3946,7 +3997,6 @@ ui_widget.h: ..\..\widget.ui \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtmetamacros.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs_impl.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfunctionaltools_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstring.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qchar.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringview.h \
@@ -4000,9 +4050,30 @@ ui_widget.h: ..\..\widget.ui \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qscopeguard.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject_impl.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbindingstorage.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmargins.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvariant.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdebug.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtextstream.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontiguouscache.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmap.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qset.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhash.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvarlengtharray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q23utility.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20utility.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qwidget.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtgui-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgets-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qwindowdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmargins.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qaction.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qkeysequence.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qicon.h \
@@ -4014,7 +4085,6 @@ ui_widget.h: ..\..\widget.ui \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qcolor.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qrgb.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qrgba64.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qimage.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpixelformat.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtransform.h \
@@ -4023,17 +4093,6 @@ ui_widget.h: ..\..\widget.ui \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qspan.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20iterator.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qline.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvariant.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdebug.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtextstream.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontiguouscache.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmap.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qset.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhash.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvarlengtharray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpalette.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qbrush.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qfont.h \
@@ -4086,33 +4145,6 @@ ui_widget.h: ..\..\widget.ui \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlocale.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qguiapplication_platform.h \
 		ui_connectwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QCheckBox \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qcheckbox.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlayoutitem.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qboxlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLabel \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlabel.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpicture.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLineEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlineedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsglobal.h \
@@ -4559,14 +4591,10 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-androidinfoprovider.obj: ..\..\androidinfoprovider.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o androidinfoprovider.obj ..\..\androidinfoprovider.cpp
-
-connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsglobal.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiglobal.h \
+androidinfoprovider.obj: ..\..\androidinfoprovider.cpp ..\..\androidinfoprovider.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QJniObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qglobal.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcoreglobal.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtversionchecks.h \
@@ -4613,13 +4641,169 @@ connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtresource.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qttranslation.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qversiontagging.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtgui-config.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiexports.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgets-config.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsexports.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qwindowdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompare.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstdlibdetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcomparehelpers.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20type_traits.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhashfunctions.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstring.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qchar.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearray.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qrefcount.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnamespace.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtmetamacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qarraydata.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qpair.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qarraydatapointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qarraydataops.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontainertools_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qxptype_traits.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20functional.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20memory.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q17memory.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearrayalgorithms.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearrayview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringfwd.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringliteral.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringalgorithms.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlatin1stringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qanystringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qutf8stringview.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringtokenizer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringbuilder.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringconverter.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringconverter_base.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmetatype.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdatastream.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qscopedpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qiodevicebase.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfloat16.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmath.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qalgorithms.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtformat_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qiterable.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmetacontainer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontainerinfo.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtaggedpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfunctionaltools_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qscopeguard.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20utility.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlist.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qiterator.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbytearraylist.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringlist.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringmatcher.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreevent.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbasictimer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qabstracteventdispatcher.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qeventloop.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdeadlinetimer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qelapsedtimer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbindingstorage.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\QNetworkInterface \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qnetworkinterface.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qtnetworkglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qtnetwork-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qtnetworkexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qhostaddress.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qabstractsocket.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qiodevice.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qspan.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20iterator.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QDebug \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdebug.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtextstream.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontiguouscache.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmap.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qset.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhash.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvarlengtharray.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QCoreApplication \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnativeinterface.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication_platform.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfuture.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfutureinterface.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmutex.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtsan_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qresultstore.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfuture_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qthreadpool.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qthread.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qrunnable.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qexception.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qpromise.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvariant.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q23utility.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o androidinfoprovider.obj ..\..\androidinfoprovider.cpp
+
+connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QSettings \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsettings.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnamespace.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcoreglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtversionchecks.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtconfiginclude.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qconfig.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcore-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtconfigmacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtdeprecationdefinitions.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompilerdetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qprocessordetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsystemdetection.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtcoreexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtdeprecationmarkers.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtclasshelpermacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtpreprocessorsupport.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qassert.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtnoop.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtypes.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtversion.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtypeinfo.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontainerfwd.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsysinfo.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlogging.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qflags.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompare_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qatomic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbasicatomic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qatomic_cxx11.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qgenericatomic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qyieldcpu.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qconstructormacros.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdarwinhelpers.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qexceptionhandling.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qforeach.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qttypetraits.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfunctionpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qglobalstatic.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmalloc.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qminmax.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qnumeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qoverload.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qswap.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtenvironmentvariables.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtresource.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qttranslation.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qversiontagging.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcompare.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstdlibdetection.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcomparehelpers.h \
@@ -4627,7 +4811,6 @@ connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtmetamacros.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobjectdefs_impl.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfunctionaltools_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstring.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qchar.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qstringview.h \
@@ -4681,9 +4864,30 @@ connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qscopeguard.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qobject_impl.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qbindingstorage.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmargins.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvariant.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdebug.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtextstream.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontiguouscache.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmap.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qset.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhash.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvarlengtharray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q23utility.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20utility.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qwidget.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiglobal.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtgui-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtguiexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgets-config.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtwidgetsexports.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qwindowdefs.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmargins.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qaction.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qkeysequence.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qicon.h \
@@ -4695,7 +4899,6 @@ connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qcolor.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qrgb.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qrgba64.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qimage.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpixelformat.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtransform.h \
@@ -4704,17 +4907,6 @@ connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qspan.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q20iterator.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qline.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvariant.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qdebug.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtextstream.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcontiguouscache.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsharedpointer_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmap.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qshareddata_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qset.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qhash.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qvarlengtharray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpalette.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qbrush.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qfont.h \
@@ -4767,34 +4959,9 @@ connectwidget.obj: ..\..\connectwidget.cpp ..\..\connectwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qlocale.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qguiapplication_platform.h \
 		ui_connectwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QCheckBox \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qcheckbox.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlayoutitem.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qboxlayout.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLabel \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlabel.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpicture.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLineEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlineedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QKeyEvent
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QKeyEvent \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QTimer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o connectwidget.obj ..\..\connectwidget.cpp
 
 joystick.obj: ..\..\joystick.cpp ..\..\joystick.h \
@@ -5167,6 +5334,14 @@ main.obj: ..\..\main.cpp ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtimer.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\QHostInfo \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qhostinfo.h \
+		..\..\androidinfoprovider.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QJniObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		..\..\datastruct.h \
 		..\..\joystick.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -5223,12 +5398,6 @@ main.obj: ..\..\main.cpp ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication_platform.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfuture.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfutureinterface.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmutex.h \
@@ -5260,28 +5429,14 @@ main.obj: ..\..\main.cpp ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
 		..\..\myscroller_vertical.h \
 		ui_rcwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QTextEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtextedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractscrollarea.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
 		..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractbutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QMouseEvent \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QEvent
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QEvent \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.obj ..\..\main.cpp
 
 mybutton.obj: ..\..\mybutton.cpp ..\..\mybutton.h \
@@ -5715,21 +5870,6 @@ myscroller_horiz.obj: ..\..\myscroller_horiz.cpp ..\..\myscroller_horiz.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QTouchEvent \
 		ui_myscroller_horiz.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLabel \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlabel.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpicture.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractbutton.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSlider \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qslider.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QDebug \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QCoreApplication
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myscroller_horiz.obj ..\..\myscroller_horiz.cpp
@@ -5953,18 +6093,6 @@ myscroller_vertical.obj: ..\..\myscroller_vertical.cpp ..\..\myscroller_vertical
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QTouchEvent \
 		ui_myscroller_vertical.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLabel \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlabel.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpicture.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSlider \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qslider.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QDebug \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QCoreApplication
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myscroller_vertical.obj ..\..\myscroller_vertical.cpp
@@ -6190,24 +6318,6 @@ rcwidget.obj: ..\..\rcwidget.cpp ..\..\rcwidget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QTouchEvent \
 		..\..\myscroller_vertical.h \
 		ui_rcwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QTextEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtextedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractscrollarea.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
-		..\..\joystick.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QPointF \
 		..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
@@ -6371,6 +6481,14 @@ udpservice.obj: ..\..\udpservice.cpp ..\..\UdpService.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtimer.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\QHostInfo \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qhostinfo.h \
+		..\..\androidinfoprovider.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QJniObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		..\..\datastruct.h \
 		..\..\joystick.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -6427,12 +6545,6 @@ udpservice.obj: ..\..\udpservice.cpp ..\..\UdpService.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication_platform.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfuture.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfutureinterface.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmutex.h \
@@ -6609,6 +6721,14 @@ widget.obj: ..\..\widget.cpp ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qtimer.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\QHostInfo \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtNetwork\qhostinfo.h \
+		..\..\androidinfoprovider.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QJniObject \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		..\..\datastruct.h \
 		..\..\joystick.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QWidget \
@@ -6665,12 +6785,6 @@ widget.obj: ..\..\widget.cpp ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qcoreapplication_platform.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnitypes_impl.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\q26numeric.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniobject.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjnienvironment.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QScopedPointer \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qjniarray.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfuture.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qfutureinterface.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qmutex.h \
@@ -6702,22 +6816,6 @@ widget.obj: ..\..\widget.cpp ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qgridlayout.h \
 		..\..\myscroller_vertical.h \
 		ui_rcwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QVariant \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QApplication \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qapplication.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QGridLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QHBoxLayout \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSpacerItem \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QTextEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qtextedit.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qabstractscrollarea.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qframe.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextdocument.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextoption.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextcursor.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qtextformat.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpen.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QVBoxLayout \
 		..\..\mybutton.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QPushButton \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qpushbutton.h \
@@ -6725,23 +6823,17 @@ widget.obj: ..\..\widget.cpp ..\..\widget.h \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\QMouseEvent \
 		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QEvent \
 		ui_widget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QSlider \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qslider.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QStackedWidget \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qstackedwidget.h \
 		..\..\connectwidget.h \
-		ui_connectwidget.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QCheckBox \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qcheckbox.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLabel \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlabel.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtGui\qpicture.h \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\QLineEdit \
-		F:\Qt\6.9.3\android_arm64_v8a\include\QtWidgets\qlineedit.h
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\QSettings \
+		F:\Qt\6.9.3\android_arm64_v8a\include\QtCore\qsettings.h \
+		ui_connectwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o widget.obj ..\..\widget.cpp
 
 qrc_res_Joystick.obj: qrc_res_Joystick.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res_Joystick.obj qrc_res_Joystick.cpp
+
+moc_androidinfoprovider.obj: moc_androidinfoprovider.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_androidinfoprovider.obj moc_androidinfoprovider.cpp
 
 moc_connectwidget.obj: moc_connectwidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_connectwidget.obj moc_connectwidget.cpp

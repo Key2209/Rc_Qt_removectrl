@@ -432,6 +432,7 @@ Makefile: ../../Rc_removectrl_v1.pro F:/Qt/6.9.3/mingw_64/mkspecs/win32-g++/qmak
 		F:/Qt/6.9.3/mingw_64/lib/Qt6Widgets.prl \
 		F:/Qt/6.9.3/mingw_64/lib/Qt6Gui.prl \
 		F:/Qt/6.9.3/mingw_64/lib/Qt6Network.prl \
+		F:/Qt/6.9.3/mingw_64/lib/Qt6Positioning.prl \
 		F:/Qt/6.9.3/mingw_64/lib/Qt6Core.prl \
 		F:/Qt/6.9.3/mingw_64/lib/Qt6EntryPoint.prl \
 		F:/Qt/6.9.3/mingw_64/mkspecs/features/build_pass.prf \
@@ -799,6 +800,7 @@ F:/Qt/6.9.3/mingw_64/mkspecs/features/lex.prf:
 F:/Qt/6.9.3/mingw_64/lib/Qt6Widgets.prl:
 F:/Qt/6.9.3/mingw_64/lib/Qt6Gui.prl:
 F:/Qt/6.9.3/mingw_64/lib/Qt6Network.prl:
+F:/Qt/6.9.3/mingw_64/lib/Qt6Positioning.prl:
 F:/Qt/6.9.3/mingw_64/lib/Qt6Core.prl:
 F:/Qt/6.9.3/mingw_64/lib/Qt6EntryPoint.prl:
 F:/Qt/6.9.3/mingw_64/mkspecs/features/build_pass.prf:

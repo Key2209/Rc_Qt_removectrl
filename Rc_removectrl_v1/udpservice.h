@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QHostInfo>
-
+#include "androidinfoprovider.h"
 #include "datastruct.h"
 using ControlValueGetter = std::function<UiDataStruct()>;
 class UdpService : public QObject
@@ -22,26 +22,23 @@ public:
 
     // 公共方法
     void startConnectionAttempt();//连接
-    void sendControlCommand();
+
 
     void sendData(const UiDataStruct &data);//发送控制数据
-    void set_targetMdnsHost(const QString &MdnsHost);
 
-
-    //手动设置MDNS地址
+    void set_targetMdnsHost(QString &MdnsHost);//设置MDNS地址,并且解析
+    //设置ip地址
     void set_targetAddress(const QString &address){
 
         m_targetAddress=QHostAddress(address);
         if (m_targetAddress.isNull()) {
+
             qWarning() << "MDNS Hostname could not be immediately resolved. Will rely on network services.";
         }
-
-
-
-
     }//手动设置IP地址
-
-
+    void setDeviceName(const QString &deviceName){
+        m_deviceName=deviceName;
+    }//设置设备名称
     void setControlValueGetter(ControlValueGetter getter) { m_controlValueGetter = std::move(getter); }
 signals:
     // 信号：通知 UI 连接状态
@@ -51,6 +48,7 @@ signals:
     // 信号：通知 UI 发生了错误
     void errorOccurred(const QString& message);
 
+    void sendIPAddress(const QString ipAddress);//发送解析后的IP地址
 private slots:
     // 槽：处理 QUdpSocket 的数据接收
     void readPendingDatagrams();
@@ -77,6 +75,7 @@ private:
     // 目标地址 (解析 MDNS 后的 IP 地址)
     QHostAddress m_targetAddress;
 
+    QString m_deviceName="unkonwn_device";//设备名称";
     // 私有辅助方法
     void sendJson(const QJsonObject& jsonObject);
     void processIncomingMessage(const QByteArray& data);
@@ -84,17 +83,7 @@ private:
 
 
     ControlValueGetter m_controlValueGetter;
-    // 由于 QUdpSocket 不支持直接用 MDNS 域名发送，
-    // 在 Android/Qt 层面需要先解析。这里简化处理，假设
-    // MDNS 解析后的 IP 地址可以直接发送，或者在初次通信时广播/硬编码。
-    // 为了简化和聚焦 UDP 通信，我们暂时**假设**在实际应用中
-    // MDNS 域名 **"esp32-robot.local"** 可以被系统网络层自动解析为 IP 地址。
-    // 在实际的 Android/Qt 应用中，你可能需要额外的库或系统调用来完成 MDNS 解析，
-    // 但在 C++/Qt 层面，我们先用 `m_targetMdnsHost` 作为发送地址。
 
-    // **重要提示：** Qt 的 `QUdpSocket::writeDatagram` 接受 `QHostAddress`。
-    // 虽然它可以解析主机名，但在某些平台和配置下，对 `.local` 地址的解析可能需要额外配置。
-    // 简化起见，我们将先用 `QHostAddress(m_targetMdnsHost)` 尝试，如果失败，则需要外部解析。
 };
 
 #endif // UDPSERVICE_H

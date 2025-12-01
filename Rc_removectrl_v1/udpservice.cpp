@@ -1,8 +1,7 @@
 #include "UdpService.h"
-
 #include <QHostInfo>
 #include <QJsonArray>
-
+#include "androidinfoprovider.h"
 // --- 构造函数与析构函数 ---
 
 UdpService::UdpService(quint16 targetPort, QObject *parent)
@@ -56,8 +55,8 @@ UdpService::~UdpService()
 void UdpService::startConnectionAttempt()
 {
     qDebug() << "Starting connection attempt...";
-    m_isConnected = false;
-    emit connectionStatusChanged(false);
+    // m_isConnected = false;
+    // emit connectionStatusChanged(false);
     if(m_targetAddress.isNull())
     {
         //m_targetAddress=QHostAddress(m_targetMdnsHost);
@@ -70,32 +69,7 @@ void UdpService::startConnectionAttempt()
     qDebug() << "Connection timer started.";
 }
 
-/**
- * @brief 发送控制命令 {"cmd": "ctrl", "t": throttle, "s": steer}
- * @param throttle 油门/速度 (-100 to 100)
- * @param steer 转向 (-100 to 100)
- */
-void UdpService::sendControlCommand()
-{
-    if (!m_isConnected) {
-        qWarning() << "Cannot send control command: Not connected.";
-        return;
-    }
 
-    UiDataStruct currentData = {}; // 初始化为 0
-
-    if (m_controlValueGetter) {
-        // ⭐ 调用回调函数，直接获取结构体
-        currentData = m_controlValueGetter();
-    }
-
-    QJsonObject json;
-    json["cmd"] = "ctrl";
-    json["x"] = currentData.joystick1.x; // 对应 't' (throttle)
-    json["y"] = currentData.joystick1.y;    // 对应 's' (steer)
-
-    sendJson(json);
-}
 
 void UdpService::sendData(const UiDataStruct &data)
 {
@@ -136,45 +110,19 @@ void UdpService::sendData(const UiDataStruct &data)
     sendJson(json);
 }
 
-void UdpService::set_targetMdnsHost(const QString &MdnsHost)
+void UdpService::set_targetMdnsHost(QString &MdnsHost)
 {
-    // m_targetMdnsHost=MdnsHost;
-    // // 尝试将 MDNS 域名解析为 IP 地址
-    // // QHostAddress 的构造函数支持域名解析，但 `.local` 域名在某些系统上可能有问题。
-    // m_targetAddress = QHostAddress(m_targetMdnsHost);
-
-    // if (m_targetAddress.isNull()) {
-    //     qWarning() << "MDNS Hostname could not be immediately resolved. Will rely on network services.";
-    //     // 即使解析失败，我们仍然使用 QHostAddress(m_targetMdnsHost) 作为发送目标，
-    //     // 期望 QUdpSocket 内部能处理，但最好是有一个已解析的 IP。
-    // }
-    // qDebug() << "Set target MDNS host to:" << m_targetMdnsHost << "Resolved address:" << m_targetAddress.toString();
-
 
     qDebug() << "Starting connection attempt...";
-    m_isConnected = false;
-    emit connectionStatusChanged(false);
-
-    // // 如果已经有 IP，直接发送一次握手并启动定时器
-    // if (!m_targetAddress.isNull()) {
-    //     connectionTimerTimeout();
-    //     m_connectionTimer->start();
-    //     return;
-    // }
-
-    // 没有 IP：如果用户指定了域名且看起来像 .local 则尝试 mDNS，否则做普通 DNS lookup
     if (!MdnsHost.isEmpty()) {
-
         // 如果没有 QZeroConf，尝试普通的 hostname -> IP 解析（QHostInfo）
+        MdnsHost=MdnsHost+".local";
         qDebug() << "Resolving host via QHostInfo:" << MdnsHost;
         QHostInfo::lookupHost(MdnsHost, this, SLOT(onHostLookupFinished(QHostInfo)));
 
     } else {
         qWarning() << "No target host specified";
     }
-
-
-
 }
 
 // --- 私有辅助方法 ---
@@ -215,6 +163,7 @@ void UdpService::connectionTimerTimeout()
     // 发送连接请求
     QJsonObject json;
     json["cmd"] = "connect";
+    json["device"]= m_deviceName;
     qDebug() << "connectionTimerTimeout Sending connection request...";
     sendJson(json);
 
@@ -241,10 +190,8 @@ void UdpService::onHostLookupFinished(const QHostInfo &info)
     for (const QHostAddress &addr : info.addresses()) {
         if (addr.protocol() == QAbstractSocket::IPv4Protocol) {
             m_targetAddress = addr;
+            emit sendIPAddress(addr.toString());//发送解析后的IP地址)
             qDebug() << "Resolved host" << info.hostName() << "->" << addr.toString();
-            // 解析成功后发送一次连接请求（或者启动定时器）
-            startConnectionAttempt();
-
             return;
         }
     }
@@ -270,9 +217,11 @@ void UdpService::readPendingDatagrams()
 
         qDebug() << "Received datagram from:" << sender.toString() << ":" << senderPort << "Data:" << datagram;
 
-        if(sender.toString() != QHostAddress(m_targetMdnsHost).toString())// 忽略非目标地址的消息
+        if(sender.toString() != QHostAddress(m_targetAddress).toString())// 忽略非目标地址的消息
         {
             qDebug() << "Ignoring datagram from unknown sender:" << sender.toString();
+            qDebug()<< "Expected sender:" << QHostAddress(m_targetMdnsHost).toString();
+            qDebug()<< "Expected sender IP:" << m_targetAddress.toString();
             continue;
         }
 
@@ -315,6 +264,8 @@ void UdpService::processIncomingMessage(const QByteArray& data)
 
     if (obj.contains("status")&&obj["status"].toString() == "connection failed") {
         qDebug() << "❌ Connection to robot failed.";
+
+        showAndroidToast(obj["device"].toString(),ToastDuration::SHORT);
         return;
     }
 
